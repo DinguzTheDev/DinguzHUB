@@ -1,6 +1,7 @@
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
-local Window = Library.CreateLib("Dinguz HUB | [SHRINE⛩️] Tapping Simulator! 🐾", "Ocean")
- 
+local Window = Library.CreateLib("Dinguz HUB | ❓ LUCKY BLOCKS Battlegrounds", "Ocean")
+
+--Info
 local Tab = Window:NewTab("Info")
 local Section = Tab:NewSection("Welcome to DINGUZ HUB!")
 Section:NewLabel("Made by CG Studio / Dinguz 😎")
@@ -9,65 +10,48 @@ Section:NewLabel("Credits: Dinguz#9873")
 Section:NewLabel("Please bug report to my discord.")
 --Main Tab
 local Tab = Window:NewTab("Main")
-local Section = Tab:NewSection("Auto")
-Section:NewButton("Auto Tap", "Need rejoin to stop", function()
-    while wait() do
-game:GetService("ReplicatedStorage").Events.Tap:FireServer("Main")
+local Section = Tab:NewSection("Add Items")
+--GiveAllItems Button
+Section:NewButton("Add All Items!", "Adding all items", function()
+    -- By DIXI
+game.StarterGui:SetCore("SendNotification", {
+    Title = "Give All Weapons";
+    Text = "Script is Loading... Version v1.2";
+    Icon = "";
+    Duration = "2";
+})
+wait(3)
+ game.StarterGui:SetCore("SendNotification", {
+    Title = "Loaded!";
+    Text = "Success";
+    Icon = "";
+    Duration = "2";
+})
+print("Started")
+while wait() do
+game:GetService("ReplicatedStorage").SpawnLuckyBlock:FireServer()
+game:GetService("ReplicatedStorage").SpawnSuperBlock:FireServer()
+game:GetService("ReplicatedStorage").SpawnDiamondBlock:FireServer()
+game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()
+game:GetService("ReplicatedStorage").SpawnGalaxyBlock:FireServer()
 end
-end)
---Rebirths Tab
-local Tab = Window:NewTab("Rebirths")
---Auto Rebirth Section
-local Section = Tab:NewSection("Auto Rebirth")
-Section:NewButton("Auto Rebirth x1", "Need rejoin to stop", function()
-	while wait(0.05) do
-	game:GetService("ReplicatedStorage").Events.Rebirth:FireServer(1)
-	end
-end)
-Section:NewButton("Auto Rebirth x5", "Need rejoin to stop", function()
-	while wait(0.05) do
-	game:GetService("ReplicatedStorage").Events.Rebirth:FireServer(5)
-	end
-end)
-Section:NewButton("Auto Rebirth x10", "Need rejoin to stop", function()
-	while wait(0.05) do
-	game:GetService("ReplicatedStorage").Events.Rebirth:FireServer(10)
-	end
-end)
-Section:NewButton("Auto Rebirth x20", "Need rejoin to stop", function()
-	while wait(0.05) do
-	game:GetService("ReplicatedStorage").Events.Rebirth:FireServer(20)
-	end
-end)
-Section:NewButton("Auto Rebirth x100", "Need rejoin to stop", function()
-	while wait(0.05) do
-	game:GetService("ReplicatedStorage").Events.Rebirth:FireServer(100)
-	end
-end)
-Section:NewButton("Auto Rebirth x500", "Need rejoin to stop", function()
-	while wait(0.05) do
-	game:GetService("ReplicatedStorage").Events.Rebirth:FireServer(500)
-	end
-end)
-Section:NewButton("Auto Rebirth x4K", "Need rejoin to stop", function()
-	while wait(0.05) do
-	game:GetService("ReplicatedStorage").Events.Rebirth:FireServer(4000)
-	end
-end)
-Section:NewButton("Auto Rebirth x13.5K", "Need rejoin to stop", function()
-	while wait(0.05) do
-	game:GetService("ReplicatedStorage").Events.Rebirth:FireServer(13500)
-	end
+ 
+-- Copyrights CG Studio 2023™ 
 end)
 local Tab = Window:NewTab("Misc")
 local Section = Tab:NewSection("Humanoid")
-Section:NewSlider("Walk Speed", "Change Your Character Walk Speed", 500, 16, function(s) -- 500 (MaxValue) | 0 (MinValue)
+Section:NewSlider("Walk Speed", "Change your WalkSpeed", 500, 16, function(s) -- 500 (MaxValue) | 0 (MinValue)
     game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
 end)
-Section:NewButton("Reset Walk Speed", "Reset your walkspeed to normal.", function()
+Section:NewSlider("Jump Power", "Change your JumpPower", 500, 50, function(s) -- 500 (MaxValue) | 0 (MinValue)
+    game.Players.LocalPlayer.Character.Humanoid.JumpPower = s
+end)
+Section:NewButton("Reset Walkspeed", "Reseting your walkspeed to normal", function()
 	game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
 end)
---rejoin
+Section:NewButton("Reset Jump Power", "Reseting your jump power to normal", function()
+	game.Players.LocalPlayer.Character.Humanoid.JumpPower = 50
+end)
 Section:NewButton("Rejoin Server", "Rejoining server.", function()	
 local TeleportService = game:GetService("TeleportService")
 local Players = game:GetService("Players")

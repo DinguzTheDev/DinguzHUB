@@ -54,9 +54,9 @@ Section:NewButton("Auto Rebirth x4K", "Need rejoin to stop", function()
 	game:GetService("ReplicatedStorage").Events.Rebirth:FireServer(4000)
 	end
 end)
-Section:NewButton("Auto Rebirth x18K", "Need rejoin to stop", function()
+Section:NewButton("Auto Rebirth x13.5K", "Need rejoin to stop", function()
 	while wait(0.05) do
-	game:GetService("ReplicatedStorage").Events.Rebirth:FireServer(18000)
+	game:GetService("ReplicatedStorage").Events.Rebirth:FireServer(13500)
 	end
 end)
 local Tab = Window:NewTab("Misc")

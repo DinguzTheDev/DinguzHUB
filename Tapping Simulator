@@ -1,0 +1,118 @@
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("Dinguz HUB | [SHRINE⛩️] Tapping Simulator! 🐾", "Ocean")
+ 
+local Tab = Window:NewTab("Info")
+local Section = Tab:NewSection("Welcome to DINGUZ HUB!")
+Section:NewLabel("Made by CG Studio / Dinguz 😎")
+Section:NewLabel("We activly working on a new updates!")
+Section:NewLabel("Credits: Dinguz#9873")
+Section:NewLabel("Please bug report to my discord.")
+--Main Tab
+local Tab = Window:NewTab("Main")
+local Section = Tab:NewSection("Auto")
+Section:NewButton("Auto Tap", "Need rejoin to stop", function()
+    while wait() do
+game:GetService("ReplicatedStorage").Events.Tap:FireServer("Main")
+end
+end)
+--Rebirths Tab
+local Tab = Window:NewTab("Rebirths")
+--Manual Rebirth Section
+local Section = Tab:NewSection("Manual Rebirth")
+Section:NewButton("Rebirth x1", "Just Rebirth x1 everywhere you are", function()
+	game:GetService("ReplicatedStorage").Events.Rebirth:FireServer(1)
+end)
+Section:NewButton("Rebirth x5", "Just Rebirth x5 everywhere you are", function()
+	game:GetService("ReplicatedStorage").Events.Rebirth:FireServer(5)
+end)
+Section:NewButton("Rebirth x10", "Just Rebirth x10 everywhere you are", function()
+	game:GetService("ReplicatedStorage").Events.Rebirth:FireServer(10)
+end)
+Section:NewButton("Rebirth x20", "Just Rebirth x20 everywhere you are", function()
+	game:GetService("ReplicatedStorage").Events.Rebirth:FireServer(20)
+end)
+Section:NewButton("Rebirth x100", "Just Rebirth x100 everywhere you are", function()
+	game:GetService("ReplicatedStorage").Events.Rebirth:FireServer(100)
+end)
+Section:NewButton("Rebirth x500", "Just Rebirth x500 everywhere you are", function()
+	game:GetService("ReplicatedStorage").Events.Rebirth:FireServer(500)
+end)
+Section:NewButton("Rebirth x4K", "Just Rebirth x4K everywhere you are", function()
+	game:GetService("ReplicatedStorage").Events.Rebirth:FireServer(4000)
+end)
+Section:NewButton("Rebirth x18K", "Just Rebirth x18K everywhere you are", function()
+	game:GetService("ReplicatedStorage").Events.Rebirth:FireServer(18000)
+end)
+--Auto Rebirth Section
+local Section = Tab:NewSection("Auto Rebirth")
+Section:NewButton("Auto Rebirth x1", "Need rejoin to stop", function()
+	while wait(0.05) do
+	game:GetService("ReplicatedStorage").Events.Rebirth:FireServer(1)
+	end
+end)
+Section:NewButton("Auto Rebirth x5", "Need rejoin to stop", function()
+	while wait(0.05) do
+	game:GetService("ReplicatedStorage").Events.Rebirth:FireServer(5)
+	end
+end)
+Section:NewButton("Auto Rebirth x10", "Need rejoin to stop", function()
+	while wait(0.05) do
+	game:GetService("ReplicatedStorage").Events.Rebirth:FireServer(10)
+	end
+end)
+Section:NewButton("Auto Rebirth x20", "Need rejoin to stop", function()
+	while wait(0.05) do
+	game:GetService("ReplicatedStorage").Events.Rebirth:FireServer(20)
+	end
+end)
+Section:NewButton("Auto Rebirth x100", "Need rejoin to stop", function()
+	while wait(0.05) do
+	game:GetService("ReplicatedStorage").Events.Rebirth:FireServer(100)
+	end
+end)
+Section:NewButton("Auto Rebirth x500", "Need rejoin to stop", function()
+	while wait(0.05) do
+	game:GetService("ReplicatedStorage").Events.Rebirth:FireServer(500)
+	end
+end)
+Section:NewButton("Auto Rebirth x4K", "Need rejoin to stop", function()
+	while wait(0.05) do
+	game:GetService("ReplicatedStorage").Events.Rebirth:FireServer(4000)
+	end
+end)
+Section:NewButton("Auto Rebirth x18K", "Need rejoin to stop", function()
+	while wait(0.05) do
+	game:GetService("ReplicatedStorage").Events.Rebirth:FireServer(18000)
+	end
+end)
+local Tab = Window:NewTab("Misc")
+local Section = Tab:NewSection("Humanoid")
+Section:NewSlider("Walk Speed", "Change Your Character Walk Speed", 500, 16, function(s) -- 500 (MaxValue) | 0 (MinValue)
+    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
+end)
+Section:NewButton("Reset Walk Speed", "Reset your walkspeed to normal.", function()
+	game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
+end)
+--rejoin
+Section:NewButton("Rejoin Server", "Rejoining server.", function()	
+local TeleportService = game:GetService("TeleportService")
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+ 
+local Rejoin = coroutine.create(function()
+    local Success, ErrorMessage = pcall(function()
+        TeleportService:Teleport(game.PlaceId, LocalPlayer)
+    end)
+ 
+    if ErrorMessage and not Success then
+        warn(ErrorMessage)
+    end
+end)
+ 
+coroutine.resume(Rejoin)
+end)
+local Tab = Window:NewTab("Settings")
+local Section = Tab:NewSection("GUI")
+Section:NewKeybind("Open/Close GUI", "Click & Change it if you want.", Enum.KeyCode.RightShift, function()
+	Library:ToggleUI()
+end)

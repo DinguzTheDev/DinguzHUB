@@ -1,9 +1,12 @@
 --Tapping Simulator Place ID = 9498006165
 --Lucky Blocks Battleground Place ID = 662417684
+--+1 Block Every Sec Place ID = 12331842898
 
 if game.PlaceId == 9498006165 then
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/DinguzTheDev/DinguzHUB/main/Tapping%20Simulator"))();
 elseif game.PlaceId == 662417684 then
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/DinguzTheDev/DinguzHUB/main/Lucky%20Blocks%20Battleground"))();
+elseif game.PlaceId == 12331842898 then
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/DinguzTheDev/DinguzHUB/main/%2B1%20Block%20every%20sec"))();
 end
 

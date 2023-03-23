@@ -2,6 +2,7 @@
 --Lucky Blocks Battleground Place ID = 662417684
 --+1 Block Every Sec Place ID = 12331842898
 --Stone Farm Simulator Place ID = 11523304146
+--[🍀X6!] Rebirth Champions X Place ID = 8540346411
 
 if game.PlaceId == 9498006165 then
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/DinguzTheDev/DinguzHUB/main/Tapping%20Simulator"))();
@@ -11,5 +12,6 @@ elseif game.PlaceId == 12331842898 then
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/DinguzTheDev/DinguzHUB/main/%2B1%20Block%20every%20sec"))();
 elseif game.PlaceId == 11523304146 then
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/DinguzTheDev/DinguzHUB/main/Stone%20Farm%20Simulator"))();
+elseif game.PlaceId == 8540346411 then
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/DinguzTheDev/DinguzHUB/main/Rebirth%20Champions"))();
 end
-

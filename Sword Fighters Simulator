@@ -1,5 +1,5 @@
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
-local Window = Library.CreateLib("Dinguz HUB | [SHRINE⛩️] Tapping Simulator! 🐾", "Ocean")
+local Window = Library.CreateLib("Dinguz HUB v1.1 | ⚔️ Sword Fighters Simulator", "Serpent")
  
 local Tab = Window:NewTab("❔ Info")
 local Section = Tab:NewSection("Welcome to DINGUZ HUB!")

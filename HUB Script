@@ -3,6 +3,7 @@
 --Tapping Simulator
 --Lucky Blocks Battleground
 --+1 Block Every Second
+--Stone Farm Simulator
 --More games very very soon!
 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/DinguzTheDev/DinguzHUB/main/HubSource"))();

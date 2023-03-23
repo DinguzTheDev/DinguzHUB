@@ -1,29 +1,29 @@
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
-local Window = Library.CreateLib("Dinguz HUB | ❓ LUCKY BLOCKS Battlegrounds", "Ocean")
+local Window = Library.CreateLib("Dinguz HUB | ❓ LUCKY BLOCKS Battlegrounds", "Serpent")
 
 --Info
-local Tab = Window:NewTab("Info")
+local Tab = Window:NewTab("❔ Info")
 local Section = Tab:NewSection("Welcome to DINGUZ HUB!")
 Section:NewLabel("Made by CG Studio / Dinguz 😎")
 Section:NewLabel("We activly working on a new updates!")
 Section:NewLabel("Credits: Dinguz#9873")
 Section:NewLabel("Please bug report to my discord.")
 --Main Tab
-local Tab = Window:NewTab("Main")
-local Section = Tab:NewSection("Add Items")
+local Tab = Window:NewTab("😎 Main")
+local Section = Tab:NewSection("🔨 Add Items")
 --GiveAllItems Button
 Section:NewButton("Add All Items!", "Adding all items", function()
     -- By DIXI
 game.StarterGui:SetCore("SendNotification", {
     Title = "Give All Weapons";
     Text = "Script is Loading... Version v1.2";
-    Icon = "";
+    Icon = "🔨";
     Duration = "2";
 })
 wait(3)
  game.StarterGui:SetCore("SendNotification", {
     Title = "Loaded!";
-    Text = "Success";
+    Text = "Success ✔";
     Icon = "";
     Duration = "2";
 })
@@ -38,8 +38,8 @@ end
  
 -- Copyrights CG Studio 2023™ 
 end)
-local Tab = Window:NewTab("Misc")
-local Section = Tab:NewSection("Humanoid")
+local Tab = Window:NewTab("🥱 Misc")
+local Section = Tab:NewSection("💀 Humanoid 💀")
 Section:NewSlider("Walk Speed", "Change your WalkSpeed", 500, 16, function(s) -- 500 (MaxValue) | 0 (MinValue)
     game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
 end)
@@ -69,8 +69,15 @@ end)
  
 coroutine.resume(Rejoin)
 end)
-local Tab = Window:NewTab("Settings")
-local Section = Tab:NewSection("GUI")
+local Tab = Window:NewTab("⚙ Settings")
+local Section = Tab:NewSection("🖥 GUI 🖥")
 Section:NewKeybind("Open/Close GUI", "Click & Change it if you want.", Enum.KeyCode.RightShift, function()
 	Library:ToggleUI()
 end)
+--Games support
+local Tab = Window:NewTab("😏 More Games")
+local Section = Tab:NewSection("⬇ Games we support ⬇")
+Section:NewLabel("+1 Blocks Every Second")
+Section:NewLabel("[SHRINE⛩️] Tapping Simulator! 🐾")
+Section:NewLabel("❓ LUCKY BLOCKS Battlegrounds")
+Section:NewLabel("⬆ Games we support ⬆")

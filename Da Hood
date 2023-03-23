@@ -1,5 +1,5 @@
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
-local Window = Library.CreateLib("Dinguz HUB | Da Hood", "Serpent")
+local Window = Library.CreateLib("Dinguz HUB v1.1 | Da Hood", "Serpent")
 
 --Info
 local Tab = Window:NewTab("❔ Info")

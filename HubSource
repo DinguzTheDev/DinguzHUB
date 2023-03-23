@@ -6,3 +6,4 @@ if game.PlaceId == 9498006165 then
 elseif game.PlaceId == 662417684 then
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/DinguzTheDev/DinguzHUB/main/Lucky%20Blocks%20Battleground"))();
 end
+

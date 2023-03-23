@@ -1,5 +1,6 @@
 --Can take to 5 seconds to load.
 --Games we support:
+--Rebirth Champions X
 --Tapping Simulator
 --Lucky Blocks Battleground
 --+1 Block Every Second
@@ -7,4 +8,3 @@
 --More games very very soon!
 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/DinguzTheDev/DinguzHUB/main/HubSource"))();
-

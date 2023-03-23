@@ -115,6 +115,7 @@ end)
 --Games support
 local Tab = Window:NewTab("😏 More Games")
 local Section = Tab:NewSection("⬇ Games we support ⬇")
+Section:NewLabel("Stone Farm Simulator! ⛏")
 Section:NewLabel("+1 Blocks Every Second")
 Section:NewLabel("[SHRINE⛩️] Tapping Simulator! 🐾")
 Section:NewLabel("❓ LUCKY BLOCKS Battlegrounds")

@@ -1,0 +1,121 @@
+--12331842898 game id
+
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("Dinguz HUB | +1 Blocks Every Second", "Serpent")
+
+--Info
+local Tab = Window:NewTab("❔ Info")
+local Section = Tab:NewSection("Welcome to DINGUZ HUB!")
+Section:NewLabel("Made by CG Studio / Dinguz 😎")
+Section:NewLabel("We activly working on a new updates!")
+Section:NewLabel("Credits: Dinguz#9873")
+Section:NewLabel("Please bug report to my discord.")
+
+local Tab = Window:NewTab("😎 Main")
+local Section = Tab:NewSection("🔨 AUTO 🔨")
+Section:NewButton("Auto Place Blocks", "Need rejoin to stop.", function()
+	while wait() do
+    game:GetService("ReplicatedStorage").Remotes.PlaceBlock:FireServer()
+    end
+end)
+
+local Section = Tab:NewSection("🛠 UPGRADES 🛠")
+Section:NewButton("[250$] Buy Wood Tower", "Buy this upgrade from everywhere.", function()
+	game:GetService("ReplicatedStorage").Remotes.PurchaseTower:InvokeServer(2)
+end)
+
+Section:NewButton("[500$] Buy Stone Tower", "Buy this upgrade from everywhere.", function()
+	game:GetService("ReplicatedStorage").Remotes.PurchaseTower:InvokeServer(3)
+end)
+
+Section:NewButton("[1K$] Buy Sand Tower", "Buy this upgrade from everywhere.", function()
+	game:GetService("ReplicatedStorage").Remotes.PurchaseTower:InvokeServer(4)
+end)
+
+Section:NewButton("[2.5K$] Buy Iron Tower", "Buy this upgrade from everywhere.", function()
+	game:GetService("ReplicatedStorage").Remotes.PurchaseTower:InvokeServer(5)
+end)
+
+Section:NewButton("[5K$] Buy Snow Tower", "Buy this upgrade from everywhere.", function()
+	game:GetService("ReplicatedStorage").Remotes.PurchaseTower:InvokeServer(6)
+end)
+
+Section:NewButton("[7.5K$] Buy Deepslate Tower", "Buy this upgrade from everywhere.", function()
+	game:GetService("ReplicatedStorage").Remotes.PurchaseTower:InvokeServer(7)
+end)
+
+Section:NewButton("[15K$] Buy Red Sandstone Tower", "Buy this upgrade from everywhere.", function()
+	game:GetService("ReplicatedStorage").Remotes.PurchaseTower:InvokeServer(8)
+end)
+
+Section:NewButton("[20K$] Buy Green Wool Tower", "Buy this upgrade from everywhere.", function()
+	game:GetService("ReplicatedStorage").Remotes.PurchaseTower:InvokeServer(9)
+end)
+
+Section:NewButton("[25K$] Buy Coral Tower", "Buy this upgrade from everywhere.", function()
+	game:GetService("ReplicatedStorage").Remotes.PurchaseTower:InvokeServer(10)
+end)
+
+Section:NewButton("[35K$] Buy Magma Tower", "Buy this upgrade from everywhere.", function()
+	game:GetService("ReplicatedStorage").Remotes.PurchaseTower:InvokeServer(11)
+end)
+
+Section:NewButton("[45K$] Buy Emerald Tower", "Buy this upgrade from everywhere.", function()
+	game:GetService("ReplicatedStorage").Remotes.PurchaseTower:InvokeServer(12)
+end)
+
+Section:NewButton("[65K$] Buy Diamond Tower", "Buy this upgrade from everywhere.", function()
+	game:GetService("ReplicatedStorage").Remotes.PurchaseTower:InvokeServer(13)
+end)
+
+Section:NewButton("[90K$] Buy Obsidian Tower", "Buy this upgrade from everywhere.", function()
+	game:GetService("ReplicatedStorage").Remotes.PurchaseTower:InvokeServer(14)
+end)
+
+Section:NewButton("[125K$] Buy Gem Tower", "Buy this upgrade from everywhere.", function()
+	game:GetService("ReplicatedStorage").Remotes.PurchaseTower:InvokeServer(15)
+end)
+local Section = Tab:NewSection("🗿 REBIRTHS 🗿")
+Section:NewButton("Auto Rebirth", "Need rejoin to stop.", function()
+	while wait(0.5) do
+game:GetService("ReplicatedStorage").Remotes.Rebirth:InvokeServer("RebirthShop")
+end
+end)
+local Tab = Window:NewTab("🥱 Misc")
+local Section = Tab:NewSection("💾 Server 💾")
+Section:NewButton("Rejoin Server", "Rejoining server.", function()	
+local TeleportService = game:GetService("TeleportService")
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+ 
+local Rejoin = coroutine.create(function()
+    local Success, ErrorMessage = pcall(function()
+        TeleportService:Teleport(game.PlaceId, LocalPlayer)
+    end)
+ 
+    if ErrorMessage and not Success then
+        warn(ErrorMessage)
+    end
+end)
+ 
+coroutine.resume(Rejoin)
+end)
+local Section = Tab:NewSection("🤣 Fun 🤣")
+Section:NewButton("Ragdoll", "Ragdoll yourself.", function()
+    game:GetService("Players").LocalPlayer.PlayerGui.Ragdoll.Events.Toggle:FireServer("R",true)
+end)
+Section:NewButton("UnRagdoll", "UnRagdoll yourself.", function()
+    game:GetService("Players").LocalPlayer.PlayerGui.Ragdoll.Events.Toggle:FireServer("R",false)
+end)
+local Tab = Window:NewTab("⚙ Settings")
+local Section = Tab:NewSection("🖥 UI 🖥")
+Section:NewKeybind("Open/Close UI", "Change it if you want.", Enum.KeyCode.RightShift, function()
+	Library:ToggleUI()
+end)
+--Games support
+local Tab = Window:NewTab("😏 More Games")
+local Section = Tab:NewSection("⬇ Games we support ⬇")
+Section:NewLabel("+1 Blocks Every Second")
+Section:NewLabel("[SHRINE⛩️] Tapping Simulator! 🐾")
+Section:NewLabel("❓ LUCKY BLOCKS Battlegrounds")
+Section:NewLabel("⬆ Games we support ⬆")

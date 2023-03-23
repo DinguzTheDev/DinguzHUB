@@ -1,0 +1,90 @@
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("Dinguz HUB | [SHRINE⛩️] Tapping Simulator! 🐾", "Ocean")
+ 
+local Tab = Window:NewTab("❔ Info")
+local Section = Tab:NewSection("Welcome to DINGUZ HUB!")
+Section:NewLabel("Made by CG Studio / Dinguz 😎")
+Section:NewLabel("We activly working on a new updates!")
+Section:NewLabel("Credits: Dinguz#9873")
+Section:NewLabel("Please bug report to my discord.")
+--Main Tab
+local Tab = Window:NewTab("😎 Main")
+local Section = Tab:NewSection("💪 Auto 💪")
+Section:NewButton("Auto Power", "Need rejoin to stop", function()
+    while wait() do
+game:GetService("ReplicatedStorage").Packages.Knit.Services.ClickService.RF.Click:InvokeServer()
+end
+end)
+Section:NewButton("Auto Equip Best", "Need rejoin to stop", function()
+    while wait() do
+game:GetService("ReplicatedStorage").Packages.Knit.Services.WeaponInvService.RF.EquipBest:InvokeServer()
+end
+end)
+--Eggs Tab
+local Tab = Window:NewTab("🥚 Eggs")
+local Section = Tab:NewSection("Weak Egg")
+Section:NewButton("Auto Open x1", "Need rejoin to stop.", function()
+ while wait(0.5) do
+	game:GetService("ReplicatedStorage").Packages.Knit.Services.EggService.RF.BuyEgg:InvokeServer({["eggName"] = "Egg 1",["auto"] = false,["amount"] = 1})
+ end
+end)
+Section:NewButton("Auto Open x3 [Gamepass Needed]", "Need rejoin to stop.", function()
+ while wait(0.5) do
+	game:GetService("ReplicatedStorage").Packages.Knit.Services.EggService.RF.BuyEgg:InvokeServer({["eggName"] = "Egg 1",["auto"] = false,["amount"] = 3})
+ end
+end)
+local Section = Tab:NewSection("Strong Egg")
+Section:NewButton("Auto Open x1", "Need rejoin to stop.", function()
+ while wait(0.5) do
+	game:GetService("ReplicatedStorage").Packages.Knit.Services.EggService.RF.BuyEgg:InvokeServer({["eggName"] = "Egg 2",["auto"] = false,["amount"] = 1})
+ end
+end)
+Section:NewButton("Auto Open x3 [Gamepass Needed]", "Need rejoin to stop.", function()
+ while wait(0.5) do
+	game:GetService("ReplicatedStorage").Packages.Knit.Services.EggService.RF.BuyEgg:InvokeServer({["eggName"] = "Egg 2",["auto"] = false,["amount"] = 3})
+ end
+end)
+Section:NewLabel("I'm too lazy to do more lol")
+local Tab = Window:NewTab("🥱 Misc")
+local Section = Tab:NewSection("💀 Humanoid [Little buggy]")
+Section:NewSlider("Walk Speed", "Change Your Character Walk Speed", 500, 16, function(s) -- 500 (MaxValue) | 0 (MinValue)
+    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
+end)
+Section:NewButton("Reset Walk Speed", "Reset your walkspeed to normal.", function()
+	game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
+end)
+--rejoin
+local Section = Tab:NewSection("💾 Server 💾")
+Section:NewButton("Rejoin Server", "Rejoining server.", function()	
+local TeleportService = game:GetService("TeleportService")
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+ 
+local Rejoin = coroutine.create(function()
+    local Success, ErrorMessage = pcall(function()
+        TeleportService:Teleport(game.PlaceId, LocalPlayer)
+    end)
+ 
+    if ErrorMessage and not Success then
+        warn(ErrorMessage)
+    end
+end)
+ 
+coroutine.resume(Rejoin)
+end)
+local Tab = Window:NewTab("⚙ Settings")
+local Section = Tab:NewSection("GUI")
+Section:NewKeybind("Open/Close GUI", "Click & Change it if you want.", Enum.KeyCode.RightShift, function()
+	Library:ToggleUI()
+end)
+--Games support
+local Tab = Window:NewTab("😏 More Games")
+local Section = Tab:NewSection("⬇ Games we support ⬇")
+Section:NewLabel("⚔️ Sword Fighters Simulator")
+Section:NewLabel("Da Hood")
+Section:NewLabel("[🍀X6!] Rebirth Champions X")
+Section:NewLabel("Stone Farm Simulator! ⛏")
+Section:NewLabel("+1 Blocks Every Second")
+Section:NewLabel("[SHRINE⛩️] Tapping Simulator! 🐾")
+Section:NewLabel("❓ LUCKY BLOCKS Battlegrounds")
+Section:NewLabel("⬆ Games we support ⬆")

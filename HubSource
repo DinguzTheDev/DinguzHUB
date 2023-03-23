@@ -10,3 +10,4 @@ elseif game.PlaceId == 12331842898 then
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/DinguzTheDev/DinguzHUB/main/%2B1%20Block%20every%20sec"))();
 end
 
+

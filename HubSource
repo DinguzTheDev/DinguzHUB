@@ -2,8 +2,9 @@
 --Lucky Blocks Battleground Place ID = 662417684
 --+1 Block Every Sec Place ID = 12331842898
 --Stone Farm Simulator Place ID = 11523304146
---[🍀X6!] Rebirth Champions X Place ID = 8540346411
+--Rebirth Champions X Place ID = 8540346411
 --Da Hood Place Id = 2788229376
+--Sword Fighters Simulator Place Id = 11040063484
 
 if game.PlaceId == 9498006165 then
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/DinguzTheDev/DinguzHUB/main/Tapping%20Simulator"))();
@@ -17,4 +18,6 @@ elseif game.PlaceId == 8540346411 then
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/DinguzTheDev/DinguzHUB/main/Rebirth%20Champions"))();
 elseif game.PlaceId == 2788229376 then
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/DinguzTheDev/DinguzHUB/main/Da%20Hood"))();
+elseif game.PlaceId == 11040063484 then
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/DinguzTheDev/DinguzHUB/main/Sword%20Fighters%20Simulator"))();
 end

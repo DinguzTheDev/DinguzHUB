@@ -6,6 +6,7 @@
 --+1 Block Every Second
 --Stone Farm Simulator
 --Da Hood
+--Sword Fighters Simulator
 --More games very very soon!
 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/DinguzTheDev/DinguzHUB/main/HubSource"))();

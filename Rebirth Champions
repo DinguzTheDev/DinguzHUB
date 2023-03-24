@@ -1,32 +1,38 @@
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
-local Window = Library.CreateLib("Dinguz HUB v1.1 | [🍀X6!] Rebirth Champions X", "Serpent")
+local Window = Library.CreateLib("Dinguz HUB v1.1 | Rebirth Champions X", "Serpent")
 
 --Info
-local Tab = Window:NewTab("❔ Info")
+local Tab = Window:NewTab(" Info")
 local Section = Tab:NewSection("Welcome to DINGUZ HUB!")
-Section:NewLabel("Made by CG Studio / Dinguz 😎")
+Section:NewLabel("Made by CG Studio / Dinguz ")
 Section:NewLabel("We activly working on a new updates!")
 Section:NewLabel("Credits: Dinguz#9873")
 Section:NewLabel("Please bug report to my discord.")
-Section:NewLabel("🚨 WARNING 🚨")
-Section:NewLabel("🚨 You need rejoin to stop Auto Function! 🚨")
+Section:NewLabel("WARNING")
+Section:NewLabel("You need rejoin to stop Auto Function!")
 --Main Tab
-local Tab = Window:NewTab("😎 Main")
-local Section = Tab:NewSection("🔄 Auto Clicker 🔄")
+local Tab = Window:NewTab("Main")
+local Section = Tab:NewSection("Auto")
 Section:NewButton("Fast Auto Clicker", "Need rejoin to stop", function()
     while wait() do
 game:GetService("ReplicatedStorage").Events.Click3:FireServer()
 end
 end)
-Section:NewButton("💸 Claim All Chests 💸", "Claiming every chest in game", function()
+Section:NewButton("Auto Craft All", "Need rejoin to stop", function()
+    while wait() do
+game:GetService("ReplicatedStorage").Functions.Request:InvokeServer("CraftAll",{})
+end
+end)
+local Section = Tab:NewSection("Claim")
+Section:NewButton("Claim All Chests", "Claiming every chest in game", function()
 game:GetService("ReplicatedStorage").Events.Chest:FireServer("Beach")
 game:GetService("ReplicatedStorage").Events.Chest:FireServer("Winter")
 game:GetService("ReplicatedStorage").Events.Chest:FireServer("Cyber")
 game:GetService("ReplicatedStorage").Events.Chest:FireServer("Nuclear")
 game:GetService("ReplicatedStorage").Events.Chest:FireServer("Hell")
 end)
-local Tab = Window:NewTab("🗿 Rebirths")
-local Section = Tab:NewSection("🔄 Auto Rebirths 🔄")
+local Tab = Window:NewTab("Rebirths")
+local Section = Tab:NewSection("Auto Rebirths")
 Section:NewButton("Auto Rebirth x1", "Need rejoin to stop", function()
     while wait() do
 game:GetService("ReplicatedStorage").Events.Rebirth:FireServer(1)
@@ -134,8 +140,8 @@ end
 end)
 Section:NewLabel("More Coming Soon!")
 --Eggs Tab
-local Tab = Window:NewTab("🥚 Eggs")
-local Section = Tab:NewSection("🌲 Forest 🌲")
+local Tab = Window:NewTab("Eggs")
+local Section = Tab:NewSection("Forest ")
 Section:NewButton("Auto Open x1", "Need rejoin to stop.", function()
  while wait(0.5) do
 	game:GetService("ReplicatedStorage").Functions.Unbox:InvokeServer("Forest","Single")
@@ -147,7 +153,7 @@ Section:NewButton("Auto Open x3", "Need rejoin to stop.", function()
  end
 end)
 
-Section:NewLabel("🌊 Atlantis 🌊")
+Section:NewLabel("Atlantis")
 Section:NewButton("Auto Open x1", "Need rejoin to stop.", function()
  while wait(0.5) do
 	game:GetService("ReplicatedStorage").Functions.Unbox:InvokeServer("Atlantis","Single")
@@ -158,7 +164,7 @@ Section:NewButton("Auto Open x3", "Need rejoin to stop.", function()
 	game:GetService("ReplicatedStorage").Functions.Unbox:InvokeServer("Atlantis","Triple")
  end
 end)
-Section:NewLabel("🏖 Desert 🏖")
+Section:NewLabel(" Desert ")
 Section:NewButton("Auto Open x1", "Need rejoin to stop.", function()
  while wait(0.5) do
 	game:GetService("ReplicatedStorage").Functions.Unbox:InvokeServer("Desert","Single")
@@ -169,7 +175,7 @@ Section:NewButton("Auto Open x3", "Need rejoin to stop.", function()
 	game:GetService("ReplicatedStorage").Functions.Unbox:InvokeServer("Desert","Triple")
  end
 end)
-Section:NewLabel("❄ Winter ❄")
+Section:NewLabel(" Winter ")
 Section:NewButton("Auto Open x1", "Need rejoin to stop.", function()
  while wait(0.5) do
 	game:GetService("ReplicatedStorage").Functions.Unbox:InvokeServer("Winter","Single")
@@ -180,7 +186,7 @@ Section:NewButton("Auto Open x3", "Need rejoin to stop.", function()
 	game:GetService("ReplicatedStorage").Functions.Unbox:InvokeServer("Winter","Triple")
  end
 end)
-Section:NewLabel("🌋 Volcano 🌋")
+Section:NewLabel(" Volcano ")
 Section:NewButton("Auto Open x1", "Need rejoin to stop.", function()
  while wait(0.5) do
 	game:GetService("ReplicatedStorage").Functions.Unbox:InvokeServer("Volcano","Single")
@@ -191,7 +197,7 @@ Section:NewButton("Auto Open x3", "Need rejoin to stop.", function()
 	game:GetService("ReplicatedStorage").Functions.Unbox:InvokeServer("Volcano","Triple")
  end
 end)
-Section:NewLabel("🌋 Magma 🌋")
+Section:NewLabel(" Magma ")
 Section:NewButton("Auto Open x1", "Need rejoin to stop.", function()
  while wait(0.5) do
 	game:GetService("ReplicatedStorage").Functions.Unbox:InvokeServer("Magma","Single")
@@ -202,7 +208,7 @@ Section:NewButton("Auto Open x3", "Need rejoin to stop.", function()
 	game:GetService("ReplicatedStorage").Functions.Unbox:InvokeServer("Magma","Triple")
  end
 end)
-Section:NewLabel("🌚 Moon 🌚")
+Section:NewLabel(" Moon ")
 Section:NewButton("Auto Open x1", "Need rejoin to stop.", function()
  while wait(0.5) do
 	game:GetService("ReplicatedStorage").Functions.Unbox:InvokeServer("Moon","Single")
@@ -213,7 +219,7 @@ Section:NewButton("Auto Open x3", "Need rejoin to stop.", function()
 	game:GetService("ReplicatedStorage").Functions.Unbox:InvokeServer("Moon","Triple")
  end
 end)
-Section:NewLabel("👨‍💻 Cyber 👨‍💻")
+Section:NewLabel("Cyber")
 Section:NewButton("Auto Open x1", "Need rejoin to stop.", function()
  while wait(0.5) do
 	game:GetService("ReplicatedStorage").Functions.Unbox:InvokeServer("Cyber","Single")
@@ -224,7 +230,7 @@ Section:NewButton("Auto Open x3", "Need rejoin to stop.", function()
 	game:GetService("ReplicatedStorage").Functions.Unbox:InvokeServer("Cyber","Triple")
  end
 end)
-Section:NewLabel("🔮 Magic 🔮")
+Section:NewLabel("Magic ")
 Section:NewButton("Auto Open x1", "Need rejoin to stop.", function()
  while wait(0.5) do
 	game:GetService("ReplicatedStorage").Functions.Unbox:InvokeServer("Magic","Single")
@@ -235,7 +241,7 @@ Section:NewButton("Auto Open x3", "Need rejoin to stop.", function()
 	game:GetService("ReplicatedStorage").Functions.Unbox:InvokeServer("Magic","Triple")
  end
 end)
-Section:NewLabel("👼 Heaven 👼")
+Section:NewLabel("Heaven ")
 Section:NewButton("Auto Open x1", "Need rejoin to stop.", function()
  while wait(0.5) do
 	game:GetService("ReplicatedStorage").Functions.Unbox:InvokeServer("Heaven","Single")
@@ -246,7 +252,7 @@ Section:NewButton("Auto Open x3", "Need rejoin to stop.", function()
 	game:GetService("ReplicatedStorage").Functions.Unbox:InvokeServer("Heaven","Triple")
  end
 end)
-Section:NewLabel("☢ Nuclear ☢")
+Section:NewLabel("Nuclear ")
 Section:NewButton("Auto Open x1", "Need rejoin to stop.", function()
  while wait(0.5) do
 	game:GetService("ReplicatedStorage").Functions.Unbox:InvokeServer("Nuclear","Single")
@@ -257,7 +263,7 @@ Section:NewButton("Auto Open x3", "Need rejoin to stop.", function()
 	game:GetService("ReplicatedStorage").Functions.Unbox:InvokeServer("Nuclear","Triple")
  end
 end)
-Section:NewLabel("🌌 Void 🌌")
+Section:NewLabel("Void ")
 Section:NewButton("Auto Open x1", "Need rejoin to stop.", function()
  while wait(0.5) do
 	game:GetService("ReplicatedStorage").Functions.Unbox:InvokeServer("Void","Single")
@@ -268,7 +274,7 @@ Section:NewButton("Auto Open x3", "Need rejoin to stop.", function()
 	game:GetService("ReplicatedStorage").Functions.Unbox:InvokeServer("Void","Triple")
  end
 end)
-Section:NewLabel("👻 Spooky 👻")
+Section:NewLabel(" Spooky ")
 Section:NewButton("Auto Open x1", "Need rejoin to stop.", function()
  while wait(0.5) do
 	game:GetService("ReplicatedStorage").Functions.Unbox:InvokeServer("Spooky","Single")
@@ -279,7 +285,7 @@ Section:NewButton("Auto Open x3", "Need rejoin to stop.", function()
 	game:GetService("ReplicatedStorage").Functions.Unbox:InvokeServer("Spooky","Triple")
  end
 end)
-Section:NewLabel("⛰ Cave ⛰")
+Section:NewLabel("Cave ")
 Section:NewButton("Auto Open x1", "Need rejoin to stop.", function()
  while wait(0.5) do
 	game:GetService("ReplicatedStorage").Functions.Unbox:InvokeServer("Cave","Single")
@@ -290,7 +296,7 @@ Section:NewButton("Auto Open x3", "Need rejoin to stop.", function()
 	game:GetService("ReplicatedStorage").Functions.Unbox:InvokeServer("Cave","Triple")
  end
 end)
-Section:NewLabel("⚙ Steampunk ⚙")
+Section:NewLabel("Steampunk ")
 Section:NewButton("Auto Open x1", "Need rejoin to stop.", function()
  while wait(0.5) do
 	game:GetService("ReplicatedStorage").Functions.Unbox:InvokeServer("Steampunk","Single")
@@ -301,7 +307,7 @@ Section:NewButton("Auto Open x3", "Need rejoin to stop.", function()
 	game:GetService("ReplicatedStorage").Functions.Unbox:InvokeServer("Steampunk","Triple")
  end
 end)
-Section:NewLabel("🔥 Hell 🔥")
+Section:NewLabel(" Hell ")
 Section:NewButton("Auto Open x1", "Need rejoin to stop.", function()
  while wait(0.5) do
 	game:GetService("ReplicatedStorage").Functions.Unbox:InvokeServer("Hell","Single")
@@ -313,8 +319,8 @@ Section:NewButton("Auto Open x3", "Need rejoin to stop.", function()
  end
 end)
 Section:NewLabel("More Coming Soon!")
-local Tab = Window:NewTab("🥱 Misc")
-local Section = Tab:NewSection("💾 Server 💾")
+local Tab = Window:NewTab(" Misc")
+local Section = Tab:NewSection(" Server ")
 Section:NewButton("Rejoin Server", "Rejoining server.", function()	
 local TeleportService = game:GetService("TeleportService")
 local Players = game:GetService("Players")
@@ -332,25 +338,24 @@ end)
  
 coroutine.resume(Rejoin)
 end)
-local Section = Tab:NewSection("💀 Humanoid 💀")
+local Section = Tab:NewSection(" Humanoid ")
 Section:NewSlider("Walk Speed", "Change Your Speed", 500, 16, function(s) -- 500 (MaxValue) | 0 (MinValue)
     game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
 end)
 
-local Tab = Window:NewTab("⚙ Settings")
-local Section = Tab:NewSection("🖥 UI 🖥")
+local Tab = Window:NewTab("Settings")
+local Section = Tab:NewSection(" UI ")
 Section:NewKeybind("Open/Close UI", "Change it if you want.", Enum.KeyCode.RightShift, function()
 	Library:ToggleUI()
 end)
 --Games support
-local Tab = Window:NewTab("😏 More Games")
+local Tab = Window:NewTab("More Games")
 local Section = Tab:NewSection("⬇ Games we support ⬇")
 Section:NewLabel("Type Race!")
-Section:NewLabel("⚔️ Sword Fighters Simulator")
+Section:NewLabel("Sword Fighters Simulator")
 Section:NewLabel("Da Hood")
-Section:NewLabel("[🍀X6!] Rebirth Champions X")
-Section:NewLabel("Stone Farm Simulator! ⛏")
+Section:NewLabel("Rebirth Champions X")
+Section:NewLabel("Stone Farm Simulator!")
 Section:NewLabel("+1 Blocks Every Second")
-Section:NewLabel("[SHRINE⛩️] Tapping Simulator! 🐾")
-Section:NewLabel("❓ LUCKY BLOCKS Battlegrounds")
-Section:NewLabel("⬆ Games we support ⬆")
+Section:NewLabel("Tapping Simulator!")
+Section:NewLabel("LUCKY BLOCKS Battlegrounds")

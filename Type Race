@@ -1,0 +1,91 @@
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("Dinguz HUB v1.1 | Type Race! 🐾", "Serpent")
+
+--Info
+local Tab = Window:NewTab("❔ Info")
+local Section = Tab:NewSection("Welcome to DINGUZ HUB!")
+Section:NewLabel("Made by CG Studio / Dinguz 😎")
+Section:NewLabel("We activly working on a new updates!")
+Section:NewLabel("Credits: Dinguz#9873")
+Section:NewLabel("Please bug report to my discord.")
+--Main
+local Tab = Window:NewTab("😎 Main")
+local Section = Tab:NewSection("🛡 Badges 🛡 [Dev Badges Did Not Add]")
+Section:NewButton("Add All Badges", "Adding all badges", function()
+    game:GetService("ReplicatedStorage").Events.AwardBadge:FireServer(2124820864) --25 wpm
+    wait(1)
+    game:GetService("ReplicatedStorage").Events.AwardBadge:FireServer(2124820863) --50 wpm
+    wait(1)
+    game:GetService("ReplicatedStorage").Events.AwardBadge:FireServer(2124820864) --75 wpm
+    wait(1)
+    game:GetService("ReplicatedStorage").Events.AwardBadge:FireServer(2124820865) --100 wpm
+    wait(1)
+    game:GetService("ReplicatedStorage").Events.AwardBadge:FireServer(2124820866) --125 wpm
+    wait(1)
+    game:GetService("ReplicatedStorage").Events.AwardBadge:FireServer(2124820867) --150 wpm
+    wait(1)
+    game:GetService("ReplicatedStorage").Events.AwardBadge:FireServer(2124820868) --175 wpm
+    wait(1)
+    game:GetService("ReplicatedStorage").Events.AwardBadge:FireServer(2124820869) --200 wpm
+    wait(1)
+    game:GetService("ReplicatedStorage").Events.AwardBadge:FireServer(2124823589) --meet a dev
+    wait(1)
+    game:GetService("ReplicatedStorage").Events.AwardBadge:FireServer(2124839376) -- beat a dev
+    wait(1)
+    game:GetService("ReplicatedStorage").Events.AwardBadge:FireServer(2124840168) -- you played lol
+    wait(1)
+    game:GetService("ReplicatedStorage").Events.AwardBadge:FireServer(2124852486) --normal mode
+    wait(1)
+    game:GetService("ReplicatedStorage").Events.AwardBadge:FireServer(2124852488) --survival mode
+    wait(1)
+    game:GetService("ReplicatedStorage").Events.AwardBadge:FireServer(2124852489) --squid game mode
+    wait(1)
+    game:GetService("ReplicatedStorage").Events.AwardBadge:FireServer(2124852490) --elimination mode
+    wait(1)
+    game:GetService("ReplicatedStorage").Events.AwardBadge:FireServer(2124852492) --first place
+    wait(1)
+    game:GetService("ReplicatedStorage").Events.AwardBadge:FireServer(2124852493) --second place
+    wait(1)
+    game:GetService("ReplicatedStorage").Events.AwardBadge:FireServer(2124852495) --third place
+    wait(1)
+    game:GetService("ReplicatedStorage").Events.AwardBadge:FireServer(2124852496) --typed a letter
+    wait(1)
+    game:GetService("ReplicatedStorage").Events.AwardBadge:FireServer(2124852497) --first to ready up
+    wait(1)
+end)
+local Tab = Window:NewTab("🥱 Misc")
+local Section = Tab:NewSection("💾 Server 💾")
+Section:NewButton("Rejoin Server", "Rejoining server.", function()	
+local TeleportService = game:GetService("TeleportService")
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+ 
+local Rejoin = coroutine.create(function()
+    local Success, ErrorMessage = pcall(function()
+        TeleportService:Teleport(game.PlaceId, LocalPlayer)
+    end)
+ 
+    if ErrorMessage and not Success then
+        warn(ErrorMessage)
+    end
+end)
+ 
+coroutine.resume(Rejoin)
+end)
+local Tab = Window:NewTab("⚙ Settings")
+local Section = Tab:NewSection("🖥 UI 🖥")
+Section:NewKeybind("Open/Close UI", "Change it if you want.", Enum.KeyCode.RightShift, function()
+	Library:ToggleUI()
+end)
+--Games support
+local Tab = Window:NewTab("😏 More Games")
+local Section = Tab:NewSection("⬇ Games we support ⬇")
+Section:NewLabel("Type Race!")
+Section:NewLabel("⚔️ Sword Fighters Simulator")
+Section:NewLabel("Da Hood")
+Section:NewLabel("[🍀X6!] Rebirth Champions X")
+Section:NewLabel("Stone Farm Simulator! ⛏")
+Section:NewLabel("+1 Blocks Every Second")
+Section:NewLabel("[SHRINE⛩️] Tapping Simulator! 🐾")
+Section:NewLabel("❓ LUCKY BLOCKS Battlegrounds")
+Section:NewLabel("⬆ Games we support ⬆")

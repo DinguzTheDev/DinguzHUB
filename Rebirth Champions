@@ -127,6 +127,11 @@ Section:NewButton("Auto Rebirth x1T", "Need rejoin to stop", function()
 game:GetService("ReplicatedStorage").Events.Rebirth:FireServer(20)
 end
 end)
+Section:NewButton("Auto Rebirth x10T", "Need rejoin to stop", function()
+    while wait() do
+game:GetService("ReplicatedStorage").Events.Rebirth:FireServer(21)
+end
+end)
 Section:NewLabel("More Coming Soon!")
 --Eggs Tab
 local Tab = Window:NewTab("🥚 Eggs")

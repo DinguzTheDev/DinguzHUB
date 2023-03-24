@@ -640,6 +640,7 @@ end)
 --Games support
 local Tab = Window:NewTab("😏 More Games")
 local Section = Tab:NewSection("⬇ Games we support ⬇")
+Section:NewLabel("Hood Customs")
 Section:NewLabel("Type Race!")
 Section:NewLabel("⚔️ Sword Fighters Simulator")
 Section:NewLabel("Da Hood")

@@ -6,6 +6,7 @@
 --Da Hood Place Id = 2788229376
 --Sword Fighters Simulator Place Id = 11040063484
 --Type Race Place ID = 7232779505
+--Hood Customs Place Id = 9825515356
 
 if game.PlaceId == 9498006165 then
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/DinguzTheDev/DinguzHUB/main/Tapping%20Simulator"))();
@@ -23,4 +24,6 @@ elseif game.PlaceId == 11040063484 then
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/DinguzTheDev/DinguzHUB/main/Sword%20Fighters%20Simulator"))();
 elseif game.PlaceId == 7232779505 then
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/DinguzTheDev/DinguzHUB/main/Type%20Race"))();
+elseif game.PlaceId == 9825515356 then
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/DinguzTheDev/DinguzHUB/main/Hood%20Customs"))();
 end

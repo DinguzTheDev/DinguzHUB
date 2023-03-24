@@ -1,5 +1,5 @@
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
-local Window = Library.CreateLib("Dinguz HUB v1.1 | Rebirth Champions X", "Serpent")
+local Window = Library.CreateLib("Dinguz HUB v1.1 | [🍀X6!] Rebirth Champions X", "Serpent")
 
 --Info
 local Tab = Window:NewTab("❔ Info")
@@ -343,9 +343,9 @@ local Section = Tab:NewSection("⬇ Games we support ⬇")
 Section:NewLabel("Type Race!")
 Section:NewLabel("⚔️ Sword Fighters Simulator")
 Section:NewLabel("Da Hood")
-Section:NewLabel("Rebirth Champions X")
+Section:NewLabel("[🍀X6!] Rebirth Champions X")
 Section:NewLabel("Stone Farm Simulator! ⛏")
 Section:NewLabel("+1 Blocks Every Second")
-Section:NewLabel("Tapping Simulator! 🐾")
+Section:NewLabel("[SHRINE⛩️] Tapping Simulator! 🐾")
 Section:NewLabel("❓ LUCKY BLOCKS Battlegrounds")
 Section:NewLabel("⬆ Games we support ⬆")

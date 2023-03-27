@@ -1,0 +1,43 @@
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("Dinguz HUB v1.1 | Jumping Pets Simulator", "Serpent")
+
+--Info
+local Tab = Window:NewTab("❔ Info")
+local Section = Tab:NewSection("Welcome to DINGUZ HUB!")
+Section:NewLabel("Made by CG Studio / Dinguz 😎")
+Section:NewLabel("We activly working on a new updates!")
+Section:NewLabel("Credits: Dinguz#9873")
+Section:NewLabel("Please bug report to my discord.")
+
+local Tab = Window:NewTab("😎 Main")
+local Section = Tab:NewSection("💸 CLAIM 💸")
+Section:NewButton("Claim All Codes", "Click to claim all codes", function()
+game:GetService("ReplicatedStorage").Remotes.SubmitSocialCode:InvokeServer("yoshi")
+game:GetService("ReplicatedStorage").Remotes.SubmitSocialCode:InvokeServer("yomao")
+game:GetService("ReplicatedStorage").Remotes.SubmitSocialCode:InvokeServer("release")
+game:GetService("ReplicatedStorage").Remotes.SubmitSocialCode:InvokeServer("10k")
+end)
+local Tab = Window:NewTab("🥱 Misc")
+local Section = Tab:NewSection("💾 Server 💾")
+Section:NewButton("Rejoin Server", "Rejoining server.", function()	
+local TeleportService = game:GetService("TeleportService")
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+ 
+local Rejoin = coroutine.create(function()
+    local Success, ErrorMessage = pcall(function()
+        TeleportService:Teleport(game.PlaceId, LocalPlayer)
+    end)
+ 
+    if ErrorMessage and not Success then
+        warn(ErrorMessage)
+    end
+end)
+ 
+coroutine.resume(Rejoin)
+end)
+local Tab = Window:NewTab("⚙ Settings")
+local Section = Tab:NewSection("🖥 UI 🖥")
+Section:NewKeybind("Open/Close UI", "Change it if you want.", Enum.KeyCode.RightShift, function()
+	Library:ToggleUI()
+end)

@@ -9,6 +9,7 @@
 --Stone Farm Simulator
 --Da Hood
 --Sword Fighters Simulator
+--Slap Battles [Mastery]
 --More games very very soon!
 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/DinguzTheDev/DinguzHUB/main/HubSource"))();

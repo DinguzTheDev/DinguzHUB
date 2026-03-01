@@ -7,6 +7,11 @@
 --Sword Fighters Simulator Place Id = 11040063484
 --Type Race Place ID = 7232779505
 --Hood Customs Place Id = 9825515356
+--Slap Battles PlaceID LIST:
+-- Main Arena: 6403373529
+-- No One Shot Server: 11520107397
+-- Killstreak only: 11828327595
+-- Slap Royale: 9015014224
 
 if game.PlaceId == 9498006165 then
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/DinguzTheDev/DinguzHUB/main/Tapping%20Simulator"))();
@@ -26,4 +31,12 @@ elseif game.PlaceId == 7232779505 then
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/DinguzTheDev/DinguzHUB/main/Type%20Race"))();
 elseif game.PlaceId == 9825515356 then
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/DinguzTheDev/DinguzHUB/main/Hood%20Customs"))();
+elseif game.PlaceId == 6403373529 then
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/DinguzTheDev/DinguzHUB/main/slapbattles_masteryhub.lua"))();
+elseif game.PlaceId == 11520107397 then
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/DinguzTheDev/DinguzHUB/main/slapbattles_masteryhub.lua"))();
+elseif game.PlaceId == 11828327595 then
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/DinguzTheDev/DinguzHUB/main/slapbattles_masteryhub.lua"))();
+elseif game.PlaceId == 9015014224 then
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/DinguzTheDev/DinguzHUB/main/slapbattles_masteryhub.lua"))();
 end

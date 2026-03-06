@@ -515,7 +515,7 @@ task.spawn(function()
                 prompt.Enabled = true
             end
         end
-        task.wait(0.1)
+        task.wait(0.01)
     end
 end)
 

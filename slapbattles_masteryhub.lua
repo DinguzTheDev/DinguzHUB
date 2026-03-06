@@ -18,13 +18,14 @@ if not validPlaceIds[game.PlaceId] then
 end
 
 -- ==========================================
--- LOADING UI
+-- LOADING UI & SERVICES
 -- ==========================================
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
 local RunService = game:GetService("RunService")
 local Players = game:GetService("Players")
 local VirtualUser = game:GetService("VirtualUser")
+local VirtualInputManager = game:GetService("VirtualInputManager") -- Do symulacji klawisza F
 
 local Window = Rayfield:CreateWindow({
    Name = "Mastery HUB | Slap Battles",
@@ -77,6 +78,10 @@ local autoInteractDelay = 0.5
 
 -- Variables for Generator Manager
 local genLoopEnabled = false
+local notificationSent = false
+
+-- Variables for Tycoon Auto Clicker
+local tycoonClickerEnabled = false
 
 -- ==========================================
 -- SCRIPTS TAB: Position Loop Features
@@ -162,7 +167,7 @@ local MSTTDelay2Slider = ScriptsTab:CreateSlider({
 })
 
 -- ==========================================
--- SCRIPTS TAB: Generator Manager
+-- SCRIPTS TAB: Generator Manager (Moved after MSTT)
 -- ==========================================
 local GeneratorSection = ScriptsTab:CreateSection("Generator Manager")
 
@@ -186,12 +191,53 @@ local ConfigGenButton = ScriptsTab:CreateButton({
    end,
 })
 
+local InstantFixButton = ScriptsTab:CreateButton({
+   Name = "Instant Repair (Rapid F-Click)",
+   Callback = function()
+       local prompt = workspace:FindFirstChild("DI_XIYT_shop") 
+           and workspace.DI_XIYT_shop:FindFirstChild("shop_model") 
+           and workspace.DI_XIYT_shop.shop_model:FindFirstChild("ElectricHitbox")
+           and workspace.DI_XIYT_shop.shop_model.ElectricHitbox:FindFirstChild("Attachment")
+           and workspace.DI_XIYT_shop.shop_model.ElectricHitbox.Attachment:FindFirstChild("FixTheGenerator")
+       
+       if prompt then
+           task.spawn(function()
+               local end_time = tick() + 0.1
+               while tick() < end_time do
+                   prompt.Enabled = true
+                   -- Symulacja klawisza F
+                   VirtualInputManager:SendKeyEvent(true, Enum.KeyCode.F, false, game)
+                   task.wait(0.01)
+                   VirtualInputManager:SendKeyEvent(false, Enum.KeyCode.F, false, game)
+                   task.wait(0.01)
+               end
+           end)
+       else
+           Rayfield:Notify({Title = "Error", Content = "Generator prompt not found!", Duration = 3, Image = "x"})
+       end
+   end,
+})
+
 local GenToggle = ScriptsTab:CreateToggle({
    Name = "Auto-Enable Generator Loop",
    CurrentValue = false,
    Flag = "GenLoopToggle",
    Callback = function(Value)
        genLoopEnabled = Value
+   end,
+})
+
+-- ==========================================
+-- SCRIPTS TAB: Tycoon Farming (Kept at bottom)
+-- ==========================================
+local TycoonSection = ScriptsTab:CreateSection("Tycoon Farming")
+
+local TycoonToggle = ScriptsTab:CreateToggle({
+   Name = "Auto-Click ÅTycoonDI_XIYT",
+   CurrentValue = false,
+   Flag = "TycoonToggle",
+   Callback = function(Value)
+       tycoonClickerEnabled = Value
    end,
 })
 
@@ -333,102 +379,7 @@ local PotatoButton = ScriptsTab:CreateButton({
 })
 
 -- ==========================================
--- SCRIPTS TAB: Player & World
--- ==========================================
-local WorldSection = ScriptsTab:CreateSection("Player & World")
-
-local InteractToggle = ScriptsTab:CreateToggle({
-   Name = "Auto Interact (All ClickDetectors)",
-   CurrentValue = false,
-   Flag = "InteractToggle",
-   Callback = function(Value)
-       autoInteractEnabled = Value
-   end,
-})
-
-local HealToggle = ScriptsTab:CreateToggle({
-   Name = "Auto Heal (100 HP)",
-   CurrentValue = false,
-   Flag = "HealToggle",
-   Callback = function(Value)
-       autoHealEnabled = Value
-   end,
-})
-
-local AntiVoidToggle = ScriptsTab:CreateToggle({
-   Name = "Anti-Void",
-   CurrentValue = false,
-   Flag = "AntiVoidToggle",
-   Callback = function(Value)
-       antiVoidEnabled = Value
-   end,
-})
-
-local AntiAFKToggle = ScriptsTab:CreateToggle({
-   Name = "Anti-AFK",
-   CurrentValue = false,
-   Flag = "AntiAFKToggle",
-   Callback = function(Value)
-       if Value then
-           antiAfkConnection = player.Idled:Connect(function()
-               VirtualUser:CaptureController()
-               VirtualUser:ClickButton2(Vector2.new())
-           end)
-       else
-           if antiAfkConnection then
-               antiAfkConnection:Disconnect()
-               antiAfkConnection = nil
-           end
-       end
-   end,
-})
-
-local AtmosphereButton = ScriptsTab:CreateButton({
-   Name = "Remove Atmosphere & Unlock Zoom",
-   Callback = function()
-       local lighting = game:GetService("Lighting")
-       for _, v in ipairs(lighting:GetChildren()) do
-           if v:IsA("Atmosphere") then
-               v:Destroy()
-           end
-       end
-       player.CameraMaxZoomDistance = math.huge
-       player.CameraMinZoomDistance = 0.5
-       Rayfield:Notify({Title = "Success", Content = "Atmosphere removed & Zoom unlocked.", Duration = 3, Image = "check"})
-   end,
-})
-
-local CameraButton = ScriptsTab:CreateButton({
-   Name = "Force Third Person & Max Zoom",
-   Callback = function()
-       player.CameraMaxZoomDistance = math.huge
-       player.CameraMinZoomDistance = 0.5
-       player.CameraMode = Enum.CameraMode.Classic
-       camera.CameraType = Enum.CameraType.Custom
-       cameraLoopConnection = true
-       
-       task.wait(0.1)
-       camera.CFrame = CFrame.new(camera.CFrame.Position + camera.CFrame.LookVector * -5)
-
-       task.spawn(function()
-           while cameraLoopConnection do
-               task.wait(1)
-               if player.CameraMode ~= Enum.CameraMode.Classic then
-                   player.CameraMode = Enum.CameraMode.Classic
-               end
-               if camera.CameraType ~= Enum.CameraType.Custom then
-                   camera.CameraType = Enum.CameraType.Custom
-               end
-               player.CameraMaxZoomDistance = math.huge
-           end
-       end)
-       
-       Rayfield:Notify({Title = "Camera Unlocked", Content = "Third person and max zoom applied.", Duration = 3, Image = "camera"})
-   end,
-})
-
--- ==========================================
--- OTHER TAB: Account Manager & Scripts
+-- OTHER TAB: Utils
 -- ==========================================
 local AccountManagerSection = OtherTab:CreateSection("Account Manager")
 
@@ -436,7 +387,7 @@ local CopyGameIdButton = OtherTab:CreateButton({
    Name = "Copy Game ID (PlaceId)",
    Callback = function()
        setclipboard(tostring(game.PlaceId))
-       Rayfield:Notify({Title = "Copied!", Content = "Game ID copied to clipboard.", Duration = 2, Image = "copy"})
+       Rayfield:Notify({Title = "Copied!", Content = "Game ID copied.", Duration = 2, Image = "copy"})
    end,
 })
 
@@ -444,24 +395,20 @@ local CopyJobIdButton = OtherTab:CreateButton({
    Name = "Copy Job ID (Server ID)",
    Callback = function()
        setclipboard(tostring(game.JobId))
-       Rayfield:Notify({Title = "Copied!", Content = "Job ID copied to clipboard.", Duration = 2, Image = "copy"})
+       Rayfield:Notify({Title = "Copied!", Content = "Job ID copied.", Duration = 2, Image = "copy"})
    end,
 })
 
-local ExternalScriptsSection = OtherTab:CreateSection("External Scripts")
+local ExternalHubs = OtherTab:CreateSection("External Hubs")
 
-local SiriusButton = OtherTab:CreateButton({
+OtherTab:CreateButton({
    Name = "Sirius",
-   Callback = function()
-       loadstring(game:HttpGet('https://sirius.menu/sirius'))()
-   end,
+   Callback = function() loadstring(game:HttpGet('https://sirius.menu/sirius'))() end,
 })
 
-local NamelessButton = OtherTab:CreateButton({
+OtherTab:CreateButton({
    Name = "Nameless",
-   Callback = function()
-       loadstring(game:HttpGet('https://raw.githubusercontent.com/FilteringEnabled/NamelessAdmin/main/Source'))()
-   end,
+   Callback = function() loadstring(game:HttpGet('https://raw.githubusercontent.com/FilteringEnabled/NamelessAdmin/main/Source'))() end,
 })
 
 -- ==========================================
@@ -472,7 +419,6 @@ local PanicSection = PanicTab:CreateSection("Danger Zone")
 local UnloadButton = PanicTab:CreateButton({
    Name = "UNLOAD SCRIPT (Destroy UI)",
    Callback = function()
-       -- Wyłączanie pętli
        loopEnabled = false
        msttEnabled = false
        autoHealEnabled = false
@@ -481,16 +427,22 @@ local UnloadButton = PanicTab:CreateButton({
        cameraLoopConnection = false
        autoInteractEnabled = false
        genLoopEnabled = false
+       tycoonClickerEnabled = false
        
-       -- Rozłączanie eventów
        if attachConnection then attachConnection:Disconnect() end
        if antiAfkConnection then antiAfkConnection:Disconnect() end
        
-       -- Czyszczenie ESP
        for _, p in ipairs(Players:GetPlayers()) do
            if p.Character and p.Character:FindFirstChild("ESPHighlight") then
                p.Character.ESPHighlight:Destroy()
            end
+       end
+
+       local hitbox = workspace:FindFirstChild("DI_XIYT_shop") 
+           and workspace.DI_XIYT_shop:FindFirstChild("shop_model") 
+           and workspace.DI_XIYT_shop.shop_model:FindFirstChild("ElectricHitbox")
+       if hitbox and hitbox:FindFirstChild("GenHighlight") then
+           hitbox.GenHighlight:Destroy()
        end
        
        Rayfield:Destroy()
@@ -501,21 +453,51 @@ local UnloadButton = PanicTab:CreateButton({
 -- BACKGROUND LOOPS
 -- ==========================================
 
--- Generator Manager Loop
+-- Generator Manager & Smoke Detection Loop (Frequency 0.01s)
 task.spawn(function()
     while true do
-        if genLoopEnabled then
-            local prompt = workspace:FindFirstChild("DI_XIYT_shop") 
-                and workspace.DI_XIYT_shop:FindFirstChild("shop_model") 
-                and workspace.DI_XIYT_shop.shop_model:FindFirstChild("ElectricHitbox")
-                and workspace.DI_XIYT_shop.shop_model.ElectricHitbox:FindFirstChild("Attachment")
-                and workspace.DI_XIYT_shop.shop_model.ElectricHitbox.Attachment:FindFirstChild("FixTheGenerator")
-            
-            if prompt and prompt:IsA("ProximityPrompt") then
-                prompt.Enabled = true
+        local hitbox = workspace:FindFirstChild("DI_XIYT_shop") 
+            and workspace.DI_XIYT_shop:FindFirstChild("shop_model") 
+            and workspace.DI_XIYT_shop.shop_model:FindFirstChild("ElectricHitbox")
+        
+        local attachment = hitbox and hitbox:FindFirstChild("Attachment")
+
+        if attachment then
+            -- 1. Auto-Enable Loop
+            if genLoopEnabled then
+                local prompt = attachment:FindFirstChild("FixTheGenerator")
+                if prompt and prompt:IsA("ProximityPrompt") then
+                    prompt.Enabled = true
+                end
+            end
+
+            -- 2. Smoke Detection Logic
+            local smoke = attachment:FindFirstChild("Smoke")
+            if smoke then
+                if not notificationSent then
+                    Rayfield:Notify({Title = "Generator!", Content = "Generator jest zepsuty!", Duration = 5, Image = "alert-triangle"})
+                    notificationSent = true
+                end
+
+                if hitbox and not hitbox:FindFirstChild("GenHighlight") then
+                    local highlight = Instance.new("Highlight")
+                    highlight.Name = "GenHighlight"
+                    highlight.FillColor = Color3.fromRGB(255, 0, 0)
+                    highlight.OutlineColor = Color3.fromRGB(255, 0, 0)
+                    highlight.FillTransparency = 0.5
+                    highlight.OutlineTransparency = 0
+                    highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop -- Widoczny przez ściany
+                    highlight.Adornee = hitbox
+                    highlight.Parent = hitbox
+                end
+            else
+                notificationSent = false
+                if hitbox and hitbox:FindFirstChild("GenHighlight") then
+                    hitbox.GenHighlight:Destroy()
+                end
             end
         end
-        task.wait(0.01)
+        task.wait(0.01) -- Zwiększona częstotliwość do 0.01s
     end
 end)
 
@@ -540,19 +522,38 @@ task.spawn(function()
             if char and char:FindFirstChild("HumanoidRootPart") then
                 char.HumanoidRootPart.CFrame = portalCFrame
                 task.wait(msttDelay1)
-                
                 if not msttEnabled then continue end 
-                
                 if char:FindFirstChild("HumanoidRootPart") then
                     char.HumanoidRootPart.CFrame = savedCFrame
                 end
-                
                 task.wait(msttDelay2)
             else
                 task.wait(0.5)
             end
         else
             task.wait(0.1)
+        end
+    end
+end)
+
+-- Tycoon Dedicated Auto-Clicker Loop
+task.spawn(function()
+    while true do
+        task.wait(0.05)
+        if tycoonClickerEnabled then
+            local char = player.Character
+            if char and char:FindFirstChild("HumanoidRootPart") then
+                local targetModel = workspace:FindFirstChild("ÅTycoonDI_XIYT")
+                if targetModel and targetModel:FindFirstChild("Click") then
+                    local clickDetector = targetModel.Click:FindFirstChildOfClass("ClickDetector")
+                    if clickDetector then
+                        local distance = (char.HumanoidRootPart.Position - targetModel.Click.Position).Magnitude
+                        if distance <= clickDetector.MaxActivationDistance then
+                            if fireclickdetector then fireclickdetector(clickDetector) end
+                        end
+                    end
+                end
+            end
         end
     end
 end)
@@ -569,17 +570,13 @@ task.spawn(function()
                     if obj:IsA("ClickDetector") and obj.Parent and obj.Parent:IsA("BasePart") then
                         local distance = (hrp.Position - obj.Parent.Position).Magnitude
                         if distance <= obj.MaxActivationDistance then
-                            if fireclickdetector then
-                                fireclickdetector(obj)
-                            end
+                            if fireclickdetector then fireclickdetector(obj) end
                         end
                     end
                     if obj:IsA("ProximityPrompt") and obj.Parent and obj.Parent:IsA("BasePart") then
                         local distance = (hrp.Position - obj.Parent.Position).Magnitude
                         if distance <= obj.MaxActivationDistance then
-                            if fireproximityprompt then
-                                fireproximityprompt(obj)
-                            end
+                            if fireproximityprompt then fireproximityprompt(obj) end
                         end
                     end
                 end
@@ -605,16 +602,9 @@ end)
 task.spawn(function()
     while true do
         task.wait(0.1)
-        if antiVoidEnabled then
-            local char = player.Character
-            if char and char:FindFirstChild("HumanoidRootPart") then
-                if char.HumanoidRootPart.Position.Y < -20 then
-                    if savedCFrame then
-                        char.HumanoidRootPart.CFrame = savedCFrame
-                    else
-                        char.HumanoidRootPart.CFrame = CFrame.new(0, 100, 0)
-                    end
-                end
+        if antiVoidEnabled and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+            if player.Character.HumanoidRootPart.Position.Y < -20 then
+                player.Character.HumanoidRootPart.CFrame = savedCFrame or CFrame.new(0, 100, 0)
             end
         end
     end
@@ -626,16 +616,14 @@ task.spawn(function()
         task.wait(1)
         if espEnabled then
             for _, p in ipairs(Players:GetPlayers()) do
-                if p ~= player and p.Character then
-                    if not p.Character:FindFirstChild("ESPHighlight") then
-                        local highlight = Instance.new("Highlight")
-                        highlight.Name = "ESPHighlight"
-                        highlight.FillColor = Color3.fromRGB(255, 0, 0)
-                        highlight.OutlineColor = Color3.fromRGB(255, 255, 255)
-                        highlight.FillTransparency = 0.5
-                        highlight.OutlineTransparency = 0
-                        highlight.Parent = p.Character
-                    end
+                if p ~= player and p.Character and not p.Character:FindFirstChild("ESPHighlight") then
+                    local highlight = Instance.new("Highlight")
+                    highlight.Name = "ESPHighlight"
+                    highlight.FillColor = Color3.fromRGB(255, 0, 0)
+                    highlight.OutlineColor = Color3.fromRGB(255, 255, 255)
+                    highlight.FillTransparency = 0.5
+                    highlight.OutlineTransparency = 0
+                    highlight.Parent = p.Character
                 end
             end
         end

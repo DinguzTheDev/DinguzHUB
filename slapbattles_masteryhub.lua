@@ -9,7 +9,12 @@ local validPlaceIds = {
 }
 
 if not validPlaceIds[game.PlaceId] then
-    return -- Zatrzymuje dalsze ładowanie skryptu
+    game.StarterGui:SetCore("SendNotification", {
+        Title = "Mastery HUB",
+        Text = "Ten skrypt działa tylko w Slap Battles!",
+        Duration = 5
+    })
+    return
 end
 
 -- ==========================================
@@ -41,7 +46,7 @@ local Window = Rayfield:CreateWindow({
 -- Creating Tabs
 local ScriptsTab = Window:CreateTab("Scripts", "code")
 local OtherTab = Window:CreateTab("Other", "component")
-local PanicTab = Window:CreateTab("PANIC", "alert-octagon") -- Nowa zakładka
+local PanicTab = Window:CreateTab("PANIC", "alert-octagon")
 
 -- Script Variables
 local player = Players.LocalPlayer
@@ -51,6 +56,13 @@ local camera = workspace.CurrentCamera
 local savedCFrame = nil
 local loopEnabled = false
 local loopDelay = 0.2
+
+-- Variables for MSTT
+local msttEnabled = false
+local msttDelay1 = 1.0 
+local msttDelay2 = 2.0 
+local portalCFrame = CFrame.new(-1110.16235, 329.900879, 3.9865303, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+
 local targetPlayerName = ""
 local attachConnection = nil
 local autoHealEnabled = false
@@ -58,6 +70,13 @@ local antiVoidEnabled = false
 local antiAfkConnection = nil
 local espEnabled = false
 local cameraLoopConnection = false
+
+-- Variables for Auto Interact
+local autoInteractEnabled = false
+local autoInteractDelay = 0.5
+
+-- Variables for Generator Manager
+local genLoopEnabled = false
 
 -- ==========================================
 -- SCRIPTS TAB: Position Loop Features
@@ -98,6 +117,81 @@ local DelaySlider = ScriptsTab:CreateSlider({
    Flag = "DelaySlider", 
    Callback = function(Value)
        loopDelay = Value
+   end,
+})
+
+-- ==========================================
+-- SCRIPTS TAB: Multi-Step Teleportation Tool
+-- ==========================================
+local MSTTSection = ScriptsTab:CreateSection("Multi-Step Teleportation [MSTT]")
+
+local MSTTToggle = ScriptsTab:CreateToggle({
+   Name = "Enable MSTT Loop",
+   CurrentValue = false,
+   Flag = "MSTTToggle", 
+   Callback = function(Value)
+       msttEnabled = Value
+       if msttEnabled and savedCFrame == nil then
+           Rayfield:Notify({Title = "Warning", Content = "You must Save Position first for MSTT to work!", Duration = 4, Image = "alert-triangle"})
+       end
+   end,
+})
+
+local MSTTDelay1Slider = ScriptsTab:CreateSlider({
+   Name = "Delay: Portal -> Target Position",
+   Range = {0.1, 5},
+   Increment = 0.1,
+   Suffix = "s",
+   CurrentValue = 1.0, 
+   Flag = "MSTTDelay1", 
+   Callback = function(Value)
+       msttDelay1 = Value
+   end,
+})
+
+local MSTTDelay2Slider = ScriptsTab:CreateSlider({
+   Name = "Delay: Loop Cooldown (Restart)",
+   Range = {0.1, 10},
+   Increment = 0.1,
+   Suffix = "s",
+   CurrentValue = 2.0, 
+   Flag = "MSTTDelay2", 
+   Callback = function(Value)
+       msttDelay2 = Value
+   end,
+})
+
+-- ==========================================
+-- SCRIPTS TAB: Generator Manager
+-- ==========================================
+local GeneratorSection = ScriptsTab:CreateSection("Generator Manager")
+
+local ConfigGenButton = ScriptsTab:CreateButton({
+   Name = "Configure Generator Prompt",
+   Callback = function()
+       local prompt = workspace:FindFirstChild("DI_XIYT_shop") 
+           and workspace.DI_XIYT_shop:FindFirstChild("shop_model") 
+           and workspace.DI_XIYT_shop.shop_model:FindFirstChild("ElectricHitbox")
+           and workspace.DI_XIYT_shop.shop_model.ElectricHitbox:FindFirstChild("Attachment")
+           and workspace.DI_XIYT_shop.shop_model.ElectricHitbox.Attachment:FindFirstChild("FixTheGenerator")
+
+       if prompt and prompt:IsA("ProximityPrompt") then
+           prompt.HoldDuration = 0
+           prompt.RequiresLineOfSight = false
+           prompt.MaxActivationDistance = 100
+           Rayfield:Notify({Title = "Success!", Content = "Generator prompt configured.", Duration = 3, Image = "check"})
+       else
+           Rayfield:Notify({Title = "Error", Content = "FixTheGenerator prompt not found!", Duration = 3, Image = "x"})
+       end
+   end,
+})
+
+local GenToggle = ScriptsTab:CreateToggle({
+   Name = "Auto-Enable Generator Loop",
+   CurrentValue = false,
+   Flag = "GenLoopToggle",
+   Callback = function(Value)
+       genLoopEnabled = Value
    end,
 })
 
@@ -243,6 +337,15 @@ local PotatoButton = ScriptsTab:CreateButton({
 -- ==========================================
 local WorldSection = ScriptsTab:CreateSection("Player & World")
 
+local InteractToggle = ScriptsTab:CreateToggle({
+   Name = "Auto Interact (All ClickDetectors)",
+   CurrentValue = false,
+   Flag = "InteractToggle",
+   Callback = function(Value)
+       autoInteractEnabled = Value
+   end,
+})
+
 local HealToggle = ScriptsTab:CreateToggle({
    Name = "Auto Heal (100 HP)",
    CurrentValue = false,
@@ -369,25 +472,27 @@ local PanicSection = PanicTab:CreateSection("Danger Zone")
 local UnloadButton = PanicTab:CreateButton({
    Name = "UNLOAD SCRIPT (Destroy UI)",
    Callback = function()
-       -- 1. Wyłączanie wszystkich pętli w tle
+       -- Wyłączanie pętli
        loopEnabled = false
+       msttEnabled = false
        autoHealEnabled = false
        antiVoidEnabled = false
        espEnabled = false
        cameraLoopConnection = false
+       autoInteractEnabled = false
+       genLoopEnabled = false
        
-       -- 2. Rozłączanie eventów
+       -- Rozłączanie eventów
        if attachConnection then attachConnection:Disconnect() end
        if antiAfkConnection then antiAfkConnection:Disconnect() end
        
-       -- 3. Czyszczenie ESP z graczy
+       -- Czyszczenie ESP
        for _, p in ipairs(Players:GetPlayers()) do
            if p.Character and p.Character:FindFirstChild("ESPHighlight") then
                p.Character.ESPHighlight:Destroy()
            end
        end
        
-       -- 4. Niszczenie całego GUI Rayfield
        Rayfield:Destroy()
    end,
 })
@@ -396,6 +501,25 @@ local UnloadButton = PanicTab:CreateButton({
 -- BACKGROUND LOOPS
 -- ==========================================
 
+-- Generator Manager Loop
+task.spawn(function()
+    while true do
+        if genLoopEnabled then
+            local prompt = workspace:FindFirstChild("DI_XIYT_shop") 
+                and workspace.DI_XIYT_shop:FindFirstChild("shop_model") 
+                and workspace.DI_XIYT_shop.shop_model:FindFirstChild("ElectricHitbox")
+                and workspace.DI_XIYT_shop.shop_model.ElectricHitbox:FindFirstChild("Attachment")
+                and workspace.DI_XIYT_shop.shop_model.ElectricHitbox.Attachment:FindFirstChild("FixTheGenerator")
+            
+            if prompt and prompt:IsA("ProximityPrompt") then
+                prompt.Enabled = true
+            end
+        end
+        task.wait(0.1)
+    end
+end)
+
+-- Standard Position Loop
 task.spawn(function()
     while true do
         if loopEnabled and savedCFrame then
@@ -408,6 +532,63 @@ task.spawn(function()
     end
 end)
 
+-- Multi-Step Teleportation Tool (MSTT) Loop
+task.spawn(function()
+    while true do
+        if msttEnabled and savedCFrame then
+            local char = player.Character
+            if char and char:FindFirstChild("HumanoidRootPart") then
+                char.HumanoidRootPart.CFrame = portalCFrame
+                task.wait(msttDelay1)
+                
+                if not msttEnabled then continue end 
+                
+                if char:FindFirstChild("HumanoidRootPart") then
+                    char.HumanoidRootPart.CFrame = savedCFrame
+                end
+                
+                task.wait(msttDelay2)
+            else
+                task.wait(0.5)
+            end
+        else
+            task.wait(0.1)
+        end
+    end
+end)
+
+-- Global Auto Interact Loop
+task.spawn(function()
+    while true do
+        task.wait(autoInteractDelay)
+        if autoInteractEnabled then
+            local char = player.Character
+            if char and char:FindFirstChild("HumanoidRootPart") then
+                local hrp = char.HumanoidRootPart
+                for _, obj in ipairs(workspace:GetDescendants()) do
+                    if obj:IsA("ClickDetector") and obj.Parent and obj.Parent:IsA("BasePart") then
+                        local distance = (hrp.Position - obj.Parent.Position).Magnitude
+                        if distance <= obj.MaxActivationDistance then
+                            if fireclickdetector then
+                                fireclickdetector(obj)
+                            end
+                        end
+                    end
+                    if obj:IsA("ProximityPrompt") and obj.Parent and obj.Parent:IsA("BasePart") then
+                        local distance = (hrp.Position - obj.Parent.Position).Magnitude
+                        if distance <= obj.MaxActivationDistance then
+                            if fireproximityprompt then
+                                fireproximityprompt(obj)
+                            end
+                        end
+                    end
+                end
+            end
+        end
+    end
+end)
+
+-- Auto Heal Loop
 task.spawn(function()
     while true do
         task.wait(0.1)
@@ -420,6 +601,7 @@ task.spawn(function()
     end
 end)
 
+-- Anti-Void Loop
 task.spawn(function()
     while true do
         task.wait(0.1)
@@ -438,6 +620,7 @@ task.spawn(function()
     end
 end)
 
+-- Player ESP Loop
 task.spawn(function()
     while true do
         task.wait(1)

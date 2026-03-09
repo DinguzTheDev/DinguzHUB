@@ -410,9 +410,6 @@ OtherTab:CreateButton({
        colorCorrection.Saturation = 15
        colorCorrection.TintColor = Color3.fromRGB(255, 0, 0)
        colorCorrection.Parent = lighting
-       
-       Rayfield:Notify({Title = "Efekt włączony", Content = "Zaraz zostaniesz wyrzucony z gry...", Duration = 3})
-       
        -- Odczekanie 3 sekund
        task.wait(3)
        
